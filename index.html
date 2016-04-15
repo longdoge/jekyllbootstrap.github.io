@@ -1,0 +1,54 @@
+---
+layout: default
+---
+
+<div class="home">
+
+          <h1 class="page-heading">Posts</h1>
+          <hr>
+
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li style="list-style: none">
+        <h3>
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h3>
+
+        <span class="post-meta">Posted on－{{ post.date | date: "%B %-d, %Y at  %H:%M:%S" }} by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ site.author }}</span></span>{% if page.categories %}
+            {% for categories in page.categories %}
+                <a class="categories-item" style="display:inline-block;font-size:14px;color:#555;background:#FFEFD5;border:1px solid #aaa;border-radius:2px;padding:1px 6px;margin:0 7px 7px 0;cursor:pointe;" href="{{ site.baseurl }}/categories/?categories={{ categories }}">{{ categories }}</a>
+            {% endfor %}
+    {% endif %}
+
+    <article class="rexp">
+            <p>{{ post.excerpt }}</p>
+        </article>
+        <p class="post-description"><a class="post-link2" href="{{ post.url | prepend: site.baseurl }}">[继续阅读...]</a></p>
+        <hr>
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% if paginator.total_pages > 1 %}
+  <ul class="pager">
+    {% if paginator.previous_page %}
+    <a class="previous" href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">
+      <div>&laquo; Prev</div>
+    </a>
+    {% else %}
+    <div class="previous"><div>&laquo; Prev</div></div>
+    {% endif %}
+
+    {% if paginator.next_page %}
+    <a class="next" href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">
+        <div>Next &raquo;</div>
+    </a>
+    {% else %}
+    <div class="next"><div>Next &raquo;</div></div>
+    {% endif %}
+  </ul>
+  {% endif %}
+
+  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+
+</div>
